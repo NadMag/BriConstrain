@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Constrained decoding explorer</title>
+<link rel="stylesheet" href="app.css">
+<script>if(new URLSearchParams(location.search).has('embed'))document.documentElement.classList.add('embed')</script>
+</head><body>
+<div id="fig"><div class="fx">
+<section id="gal"><div id="bwrap"><div id="bsel"></div></div><p id="cap"></p></section>
+<div id="panel">
+  <header>
+    <div class="title"><b id="ttl">Where does the next part attach?</b><span id="sub" hidden></span></div>
+    <div class="seg" id="modeSeg"><button data-m="raw" class="on">Unconstrained</button><button data-m="con">Constrained<span class="tap" aria-hidden="true"><i class="ring"></i><svg viewBox="0 0 24 24"><path d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74l-3.43-.72c-.08-.01-.15-.03-.24-.03-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"/></svg></span></button></div>
+    <div class="hr"><span id="stepinfo" hidden></span><button id="sampleBtn">Sample</button></div>
+  </header>
+  <main>
+    <div id="left"><section id="view"><canvas id="cv"></canvas>
+      <div id="readout" hidden></div><div id="badge"></div><div id="loading">Loading LDraw parts…</div>
+      <div id="legend"><i class="ok"></i>valid <i class="bad"></i>collides</div>
+      <div class="attr">LDraw parts: LDraw.org, CC BY 2.0</div>
+    </section>
+    <div id="strip"><div id="recline"></div><div id="hint"></div></div>
+    <div id="tl"><button id="prev" class="nb">&#9664; Prev</button><div id="ticks"></div><button id="next" class="nb">Next &#9654;</button></div></div>
+    <aside id="cards"><div id="grid"></div><div id="list" hidden><div class="lh"><span id="ltitle"></span><button class="back" id="lclose">Close ✕</button></div><div id="lrows"></div></div><div id="more"></div>
+      <div class="key"><span><i class="bar un"></i>unconstrained</span><span><i class="bar cn"></i>constrained</span><span class="kold"><i class="oldk"></i>other mode (dashed)</span></div>
+    </aside>
+  </main>
+</div></div>
+<script src="../static/supp_fetch.js"></script>
+<script src="app.bundle.js"></script>
+</body></html>

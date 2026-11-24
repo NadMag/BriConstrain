@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" data-theme="bands2">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BriConstrain: Geometrically Constrained Decoding for Autoregressive Brick Assembly Generation</title>
+<meta name="description" content="BriConstrain restricts a pretrained brick-assembly language model's next-token probabilities to valid, collision-free placements during decoding.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="icon" href="static/icon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="static/icon/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="static/icon/apple-touch-icon.png">
+<link rel="stylesheet" href="static/css/style.css">
+<link rel="stylesheet" href="static/css/theme-bands.css">
+<link rel="stylesheet" href="static/css/theme-bands2.css">
+
+</head>
+<body>
+
+<header class="hero container">
+  <h1><span class="name">BriConstrain:</span> Geometrically Constrained Decoding <br>for Autoregressive Brick Assembly Generation</h1>
+  <p class="authors"><span class="au">Nadav Magar<sup>1</sup></span> <span class="au">Amir Hertz<sup>2</sup></span> <span class="au">Ariel Shamir<sup>3*</sup></span> <span class="au">Or Patashnik<sup>1*</sup></span><br><span class="aff"><span class="au"><sup>1</sup>Tel Aviv University</span> <span class="au"><sup>2</sup>Google DeepMind</span> <span class="au"><sup>3</sup>Reichman University</span> <span class="au"><sup>*</sup>Equal advising</span></span></p>
+  <nav class="links">
+    <a class="btn" href="https://arxiv.org/pdf/2611.33135" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z M14 2v6h6"/></svg>Paper</a>
+    <a class="btn" href="https://arxiv.org/abs/2611.33135" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z M8 9h8 M8 13h8 M8 17h5"/></svg>arXiv</a>
+    <a class="btn" href="#" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5 M16 7l5 5-5 5"/></svg>Code</a>
+    <a class="btn" href="https://www.youtube.com/watch?v=2qLr8mZhTnY" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="fill"><path d="M7 5l12 7-12 7z"/></svg>Video</a>
+  </nav>
+</header>
+
+<nav class="secnav" aria-label="Sections"><a class="brand" href="#">BriConstrain</a><div><a href="#teaser">Results</a><a href="#abstract">Abstract</a><a href="#video">Video</a><a href="#method">Method</a><a href="#explore">Explorer</a><a href="#bibtex">BibTeX</a></div></nav>
+
+<main>
+
+<section class="container wide" id="teaser">
+  <div class="frame frame-compare"><iframe data-src="compare/build.html?embed" title="Unconstrained, rejection sampling and BriConstrain built side by side"></iframe></div>
+  <p class="caption">The same caption decoded three ways. Freeform decoding places colliding parts (red). Rejection sampling redraws a part when it collides (orange) and keeps it when all eight draws collide. BriConstrain filters colliding placements out before sampling, so collisions are rare. Pick a build above the panels; drag a view to orbit.</p>
+</section>
+
+<section class="container" id="abstract">
+  <h2>Abstract</h2>
+  <div class="text">
+    <p>Language models can generate LEGO assemblies from text, but their builds often contain parts that collide or attach to nothing. The usual approach of rejecting and resampling invalid placements discards decoded tokens without guaranteeing a valid build.</p>
+    <p>We present <b>BriConstrain</b>, a constrained decoding method that restricts a pretrained language model's next-token probabilities before sampling, steering it towards valid placements. Because the validity of a brick placement depends on the non-predetermined build state, it cannot be compiled into a fixed grammar and must be checked dynamically. However, checking the validity of a brick before sampling is challenging as the space of valid placements is combinatorially large and cannot be enumerated exhaustively.</p>
+    <p>Our key idea is to narrow the search space by constraining <em>how</em> parts attach rather than which parts attach to each other. Concretely, given the model's predictions of the currently placed part, and the previously placed parent it wants to connect to, we constrain the model's choice of how they attach. This allows us to span the space of part attachments, using a precomputed geometric oracle, and to effectively filter out colliding options. With valid attachment candidates in hand, we bias the model's next-token distribution towards the remaining valid candidates.</p>
+    <div class="stats" aria-hidden="true">
+      <div><b>31% <i>→</i> 91%</b><span>collision-free builds, BrickNet</span></div>
+      <div><b>15% <i>→</i> 65%</b><span>collision-free builds, ICLF</span></div>
+      <div><b>~60%</b><span>of rejection sampling's decoding cost</span></div>
+    </div>
+    <p>We evaluate our method on two LEGO formats and models: BrickNet, which annotates connectivity explicitly, and our proposed Implicit Connectivity LDraw Format (ICLF), which uses numeric values for placements and leaves connectivity implicit. Our method raises collision-free builds from 31% to 91% on BrickNet and from 15% to 65% on ICLF, and outperforms rejection sampling on both formats at about 60% of its decoding cost.</p>
+  </div>
+</section>
+
+<section class="container" id="video">
+  <h2>Video</h2>
+  <iframe class="vid" src="https://www.youtube-nocookie.com/embed/2qLr8mZhTnY?rel=0" title="BriConstrain video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <p class="yt"><a href="https://www.youtube.com/watch?v=2qLr8mZhTnY" target="_blank" rel="noopener">Watch on YouTube</a></p>
+</section>
+
+<section class="container wide" id="method">
+  <h2>How it works</h2>
+  <div class="walk" id="walk" tabindex="0" aria-roledescription="walkthrough">
+    <div class="vp" id="vp" role="img" aria-label="Animated method figure: constrained decoding of one part"></div>
+    <div class="narr">
+      <div class="txt" id="narr-text" aria-live="polite"></div>
+      <div class="ctl">
+        <button type="button" id="w-prev" aria-label="Previous step">‹</button>
+        <div class="dots" id="dots"></div>
+        <button type="button" id="w-next" aria-label="Next step">›</button>
+        <button type="button" id="w-play" class="play" aria-label="Pause">❚❚</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container wide" id="explore">
+  <h2>Inside one decoding step</h2>
+  <p class="text lead">Every candidate attachment at a step, with the probability the model gives it before (orange) and after (blue) the constraint. Pick a build, scrub through its steps on the timeline, and hover a candidate to find it in 3D.</p>
+  <div class="frame frame-explore"><iframe data-src="explore/index.html?embed" title="Constrained decoding explorer" scrolling="no"></iframe></div>
+</section>
+
+<section class="container" id="bibtex">
+  <h2>BibTeX</h2>
+  <div class="bib"><button class="copy" type="button">Copy</button><pre><code>@article{briconstrain2026,
+  title   = {BriConstrain: Geometrically Constrained Decoding
+             for Autoregressive Brick Assembly Generation},
+  author  = {Magar, Nadav and Hertz, Amir and Shamir, Ariel and Patashnik, Or},
+  journal = {arXiv preprint arXiv:2611.33135},
+  year    = {2026}
+}</code></pre></div>
+</section>
+
+</main>
+
+<footer class="foot container">
+  <p>LEGO<sup>®</sup> is a trademark of the LEGO Group, which does not sponsor, authorize or endorse this work. Part geometry from the LDraw library (LDraw.org, CC BY 2.0).</p>
+</footer>
+
+<script src="static/js/page.js" defer></script>
+<script src="static/supp_fetch.js"></script>
+<script src="static/js/method.js" defer></script>
+</body>
+</html>

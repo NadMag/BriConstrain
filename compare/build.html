@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Same caption, three builds</title>
+<link rel="stylesheet" href="build.css">
+<script>if(new URLSearchParams(location.search).has('embed'))document.documentElement.classList.add('embed')</script>
+</head><body>
+<header id="top"><div id="pkw"><button type="button" class="car" id="pk-l" aria-label="Previous builds">‹</button><div id="pick"></div><button type="button" class="car" id="pk-r" aria-label="Next builds">›</button></div></header>
+<div id="fit"><div id="panel">
+  <div id="tl"><button id="pp" title="Pause" aria-label="Pause">❚❚</button><div id="bar"><div id="fill"></div></div><div id="step"></div></div>
+  <main>
+    <section class="side unc" id="s-unc"><div class="ttl"><i></i>Unconstrained</div><div class="vw"><canvas id="cv-unc"></canvas></div>
+      <div class="cnt" id="c-unc"><span>parts <b class="np">0</b></span><span class="col">collisions <b class="nc">0</b></span></div></section>
+    <section class="side con" id="s-con"><div class="ttl"><i></i>Ours</div><div class="vw"><canvas id="cv-con"></canvas></div>
+      <div class="cnt" id="c-con"><span>parts <b class="np">0</b></span><span class="col">collisions <b class="nc">0</b></span></div></section>
+    <section class="side rej" id="s-rej"><div class="ttl"><i></i>Rejection sampling</div><div class="vw"><canvas id="cv-rej"></canvas></div>
+      <div class="cnt" id="c-rej"><span>parts <b class="np">0</b></span><span class="col">collisions <b class="nc">0</b></span><span class="rs" style="display:none">resamples <b class="nr">0</b></span></div></section>
+    <div id="loading">Loading LDraw parts…</div>
+  </main>
+  <footer><div id="cap"></div><label id="spd">Speed <select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1.0×</option><option value="1.5">1.5×</option><option value="2">2.0×</option></select></label><div id="attr">LDraw parts: LDraw.org, CC BY 2.0</div></footer>
+  <div id="tip"></div>
+  <div id="fade"></div>
+</div></div>
+<script src="../static/supp_fetch.js"></script>
+<script src="build.bundle.js"></script>
+</body></html>

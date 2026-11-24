@@ -1,0 +1,62 @@
+/* Look "studio": a LEGO building-instructions manual crossed with an engineering blueprint. Navy stud-grid header with a brick strip,
+   drafting-paper body, sections numbered like manual steps, hard offset shadows, result tiles. Active with <html data-theme="studio">. */
+[data-theme=studio]{--navy:#0d1b2e;--paper:#f6f4ee;--grid:#0d1b2e0b;--disp:"Bricolage Grotesque","Noto Sans",system-ui,sans-serif;--yel:#F2C230}
+[data-theme=studio] body{overflow-x:clip;background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px;background-position:-1px -1px}
+
+/* header: navy, faint studs, big display title, brick strip along its bottom edge */
+[data-theme=studio] .hero{position:relative;max-width:none;padding:64px max(var(--gut),calc(50% - 640px)) 76px;color:#fff;
+  background-color:var(--navy);background-image:radial-gradient(circle,#ffffff10 0 5px,transparent 5.5px);background-size:30px 30px;background-position:15px 15px}
+[data-theme=studio] .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:20px;
+  background:radial-gradient(ellipse 9px 4px at 50% 4px,#ffffff55 0 98%,transparent) 0 0/24px 20px repeat-x,
+    linear-gradient(180deg,#ffffff30,transparent 35%),
+    repeating-linear-gradient(90deg,#E69F00 0 94px,#0000 94px 96px,#0072B2 96px 190px,#0000 190px 192px,#009E73 192px 286px,#0000 286px 288px,var(--yel) 288px 382px,#0000 382px 384px,#D62828 384px 478px,#0000 478px 480px,#E9E6DD 480px 574px,#0000 574px 576px)}
+[data-theme=studio] h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,3.2vw,46px);line-height:1.08;letter-spacing:-.025em;max-width:26ch;margin:0 auto;text-wrap:balance}
+[data-theme=studio] h1 br{display:none}
+[data-theme=studio] h1 .name{display:block;font-weight:800;font-size:1.9em;letter-spacing:-.035em;color:var(--yel);margin-bottom:.14em}
+[data-theme=studio] h1 sup{font-size:.4em;vertical-align:.9em}
+[data-theme=studio] .authors{color:#ffffffb3;font-size:18px;margin-top:26px}
+[data-theme=studio] .links{gap:10px;margin-top:26px}
+[data-theme=studio] .btn{background:transparent;border:2px solid #ffffffcc;color:#fff;font-weight:600;padding:9px 20px 9px 16px;transition:background .15s,color .15s,transform .15s}
+[data-theme=studio] .btn:hover{background:#fff;color:var(--navy);transform:translateY(-2px)}
+[data-theme=studio] .btn[aria-disabled=true]{opacity:.42}
+
+/* sections: numbered like instruction steps, left-aligned display headings */
+[data-theme=studio] main{counter-reset:step}
+[data-theme=studio] main>section.container{margin-top:96px}
+[data-theme=studio] main>section.container:first-child{margin-top:56px}
+[data-theme=studio] h2{counter-increment:step;font-family:var(--disp);font-weight:700;font-size:clamp(30px,1.6vw + 16px,46px);letter-spacing:-.02em;text-align:left;
+  display:flex;align-items:center;gap:18px;margin:0 0 26px;padding-bottom:16px;border-bottom:2px dashed #0d1b2e2e}
+[data-theme=studio] h2::before{content:counter(step);flex:none;display:grid;place-items:center;width:1.45em;height:1.45em;border-radius:10px;background:var(--navy);color:#fff;
+  font:700 .62em/1 var(--mono);box-shadow:4px 4px 0 var(--con)}
+[data-theme=studio] .lead{text-align:left;margin:-6px 0 26px;max-width:62em;color:#3f4552}
+[data-theme=studio] .caption{text-align:left;margin-left:0;font-size:.85em;color:#4d5360;border-left:3px solid var(--unc);padding-left:14px}
+[data-theme=studio] #teaser .caption{max-width:76.5vw;margin-left:calc(50% - 38.25vw)}
+[data-theme=studio] .text p{text-align:left;hyphens:manual}
+[data-theme=studio] #abstract .text>p:first-child::first-letter{font-family:var(--disp);font-weight:800;float:left;font-size:3.6em;line-height:.82;margin:.08em .1em 0 0;color:var(--con)}
+
+/* key results as tiles */
+[data-theme=studio] .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:30px 0 34px}
+[data-theme=studio] .stats div{background:#fff;border:2px solid var(--navy);border-radius:12px;padding:18px 20px 16px;box-shadow:6px 6px 0 var(--navy);transition:transform .2s,box-shadow .2s}
+[data-theme=studio] .stats div:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--navy)}
+[data-theme=studio] .stats b{display:block;font:800 clamp(28px,2.4vw,40px)/1.05 var(--disp);letter-spacing:-.02em;color:var(--con)}
+[data-theme=studio] .stats b i{font-style:normal;color:var(--unc)}
+[data-theme=studio] .stats span{display:block;margin-top:8px;font:600 .68em/1.4 var(--mono);text-transform:uppercase;letter-spacing:.05em;color:#5a6070}
+@media (max-width:760px){[data-theme=studio] .stats{grid-template-columns:1fr}}
+
+/* cards: crisp navy outline + hard offset shadow (the instruction-manual look) */
+[data-theme=studio] .walk,[data-theme=studio] .bib{border:2px solid var(--navy);border-radius:14px;box-shadow:8px 8px 0 #0d1b2e1f}
+[data-theme=studio] .walk .vp{border-bottom:2px dashed #0d1b2e26}
+[data-theme=studio] .narr .kick{font-family:var(--mono);color:var(--con)}
+[data-theme=studio] .ctl button{border:2px solid var(--navy)}
+[data-theme=studio] .dots button i{background:var(--con)}
+[data-theme=studio] .video-slot{border-radius:14px;color:#ffffffb3;font-family:var(--disp);font-size:24px;letter-spacing:.02em;
+  background-color:var(--navy);background-image:radial-gradient(circle,#ffffff12 0 6px,transparent 6.5px);background-size:34px 34px;box-shadow:8px 8px 0 #0d1b2e1f}
+[data-theme=studio] .bib{background:#fff}
+[data-theme=studio] .copy{border:2px solid var(--navy);font-weight:600}
+[data-theme=studio] .frame:not(.loaded)::after{background:#fff;border:2px dashed #0d1b2e33}
+
+/* footer: navy band with a brick strip on top */
+[data-theme=studio] .foot{position:relative;max-width:none;margin-top:110px;border-top:0;padding:44px max(var(--gut),calc(50% - 640px)) 40px;background:var(--navy);color:#ffffff99}
+[data-theme=studio] .foot::before{content:"";position:absolute;left:0;right:0;top:-12px;height:12px;
+  background:repeating-linear-gradient(90deg,#0072B2 0 94px,#0000 94px 96px,var(--yel) 96px 190px,#0000 190px 192px,#E69F00 192px 286px,#0000 286px 288px,#009E73 288px 382px,#0000 382px 384px)}

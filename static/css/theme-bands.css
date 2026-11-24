@@ -1,0 +1,17 @@
+/* Look "bands": the current page, with full-width alternating white / light-grey section bands, a tinted header band,
+   and a short blue/orange accent under each heading (the figures' "ours" / "unconstrained" colours). Active with <html data-theme="bands">. */
+[data-theme^=bands] body{overflow-x:clip}
+[data-theme^=bands] .hero,[data-theme^=bands] main>section.container{position:relative}
+[data-theme^=bands] .hero::before,[data-theme^=bands] main>section.container::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);z-index:-1}
+[data-theme^=bands] .hero{padding-top:64px;padding-bottom:48px}
+[data-theme^=bands] .hero::before{background:linear-gradient(180deg,#e9eef6,#f3f6fa);border-bottom:1px solid #dfe5ee}
+[data-theme^=bands] main>section.container,[data-theme^=bands] main>section.container:first-child{margin-top:0;padding-top:60px;padding-bottom:64px}
+[data-theme^=bands] main>section.container:nth-child(odd)::before{background:#fff}
+[data-theme^=bands] main>section.container:nth-child(even)::before{background:#f4f5f8;border-top:1px solid #eceef2;border-bottom:1px solid #eceef2}
+[data-theme^=bands] h2{margin-bottom:30px}
+[data-theme^=bands] h2::after{content:"";display:block;width:64px;height:4px;margin:14px auto 0;border-radius:2px;background:linear-gradient(90deg,var(--con) 0 72%,var(--unc) 72%)}
+[data-theme^=bands] .bib{background:#fff;border:1px solid var(--line)}
+[data-theme^=bands] .video-slot{background:#eef0f4}
+[data-theme^=bands] .foot{margin-top:0;border-top:0;background:#f4f5f8;position:relative}
+[data-theme^=bands] .foot::before{content:"";position:absolute;inset:0 auto 0 50%;width:100vw;transform:translateX(-50%);background:#eceef2;z-index:-1}
+[data-theme^=bands] .frame:not(.loaded)::after{background:#eef0f4}
